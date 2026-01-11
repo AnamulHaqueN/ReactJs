@@ -1,12 +1,15 @@
-
-import type { JSX } from 'react/jsx-runtime'
+import {useState, type JSX } from 'react'
 import './App.css'
 
 function App(): JSX.Element {
-
+  const [count, setCount] = useState(() => {
+    console.log("Rendering .... ");
+    return 0;
+  })
   return (
-    <div className="bg-blue-900 text-white p-4 rounded-lg">
-      Tailwind is working! 🎉
+    <div>
+      <h1>Count - {count} </h1>
+      <button onClick={() => setCount(prev => prev + 1)}>add</button>
     </div>
   )
 }

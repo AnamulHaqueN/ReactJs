@@ -1,0 +1,172 @@
+/* ===================== BASE ===================== */
+
+body {
+  background-color: #0f172a; /* darker navy instead of flat dark */
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Urbanist", sans-serif;
+}
+
+/* ===================== TEXT ===================== */
+
+p,
+a,
+li,
+input {
+  font-size: 1.7rem;
+  letter-spacing: 0.12rem;
+  line-height: 1.6;
+  color: #e5e7eb; /* soft white */
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+h1 {
+  color: #f9fafb;
+  text-align: center;
+  font-size: 3.6rem;
+  text-decoration: underline;
+  font-family: "Syne", sans-serif;
+  letter-spacing: 0.12rem;
+}
+
+/* ===================== BUTTON ===================== */
+
+button {
+  padding: 0 1.6rem;
+  border-radius: 0.4rem;
+  height: 4.2rem;
+  cursor: pointer;
+  border: none;
+  background-color: #10b981; /* emerald */
+  color: #052e16;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  margin-left: 1.2rem;
+}
+
+button:hover {
+  background-color: #34d399;
+  color: #022c22;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.6);
+}
+
+/* ===================== HEADER ===================== */
+
+header {
+  height: 10rem;
+  padding: 0 10rem;
+  display: flex;
+  align-items: center;
+  background-color: #020617; /* darker than body */
+  border-bottom: 1px solid #1e293b;
+}
+
+header div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+header ul {
+  display: flex;
+  gap: 3.2rem;
+  text-transform: uppercase;
+}
+
+header li a {
+  color: #cbd5f5;
+  font-weight: 500;
+}
+
+header li a:hover {
+  color: #f97316; /* orange accent */
+}
+
+/* ===================== FOOTER ===================== */
+
+footer {
+  height: 10rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #94a3b8;
+}
+
+/* ===================== ACCORDION ===================== */
+
+.section-accordion {
+  width: 60%;
+  margin: 6.4rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.section-accordion li {
+  background-color: #020617;
+  padding: 1.8rem;
+  border-radius: 0.5rem;
+  border-left: 0.4rem solid #38bdf8; /* blue accent */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ACTIVE STATE */
+.section-accordion .active-btn {
+  background-color: #f97316;
+  color: #fff;
+  border-left-color: #fb923c;
+}
+
+.section-accordion .active-btn:hover {
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.6);
+}
+
+/* ===================== ACCORDION GRID ===================== */
+
+.accordion-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-question {
+  font-weight: 700;
+  font-family: "Syne", sans-serif;
+  letter-spacing: 0.1rem;
+  font-size: 1.8rem;
+  color: #f8fafc;
+}
+
+/* ===================== PAGINATION ===================== */
+
+.pagination-section {
+  margin: auto;
+  display: flex;
+  gap: 3.2rem;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media screen and (max-width: 980px) {
+  header {
+    padding: 0 4rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .section-accordion {
+    width: 90%;
+  }
+}
