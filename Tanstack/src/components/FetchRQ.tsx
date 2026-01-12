@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchPosts } from "../API/api";
+import { NavLink } from "react-router-dom";
 
 const FetchOld = () => {
   const getPostsData = async () => {
@@ -15,8 +16,10 @@ const FetchOld = () => {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["posts"],
     queryFn: getPostsData,
-    gcTime: 1000,
-    staleTime: 5000,
+    // gcTime: 1000,
+    // staleTime: 10000,
+    refetchInterval: 5000,
+    refetchIntervalInBackground: true,
   });
 
   if (isPending) return <p> Loading ....</p>;
@@ -27,8 +30,11 @@ const FetchOld = () => {
       <ul className="section-accordion">
         {data?.map((post: any) => (
           <li key={post.id}>
-            <p>{post.title}</p>
-            <p>{post.body}</p>
+            <NavLink to={`/rq/${post.id}`}>
+              <p>{post.id}</p>
+              <p>{post.title}</p>
+              <p>{post.body}</p>
+            </NavLink>
           </li>
         ))}
       </ul>

@@ -94,3 +94,35 @@ const { data, isPending, isError, error } = useQuery({
 ```
 
 ### staleTime
+
+During staleTime, the data is considered fresh, so no new API request is made.
+Once staleTime expires, the data becomes stale, and a new API request is triggered when the query is used again.
+
+`Example:`
+
+```ts
+const { data, isPending, isError, error } = useQuery({
+  queryKey: ["posts"],
+  queryFn: getPostsData,
+  gcTime: 1000,
+  staleTime: 10000,
+});
+```
+
+### Pooling
+
+Polling is used to automatically refetch an API at a fixed interval.
+It can also be configured to run in the background, meaning the API will continue to refresh even when the app is in another browser tab.
+
+`example:`
+
+```ts
+const { data, isPending, isError, error } = useQuery({
+  queryKey: ["posts"],
+  queryFn: getPostsData,
+  // gcTime: 1000,
+  // staleTime: 10000,
+  refetchInterval: 5000,
+  refetchIntervalInBackground: true,
+});
+```
