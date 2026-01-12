@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { deletePost, fetchPostsRQ } from "../API/api";
+import { deletePost, fetchPostsRQ, updatePost } from "../API/api";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
@@ -35,6 +35,21 @@ const FetchRQ = () => {
     },
   });
 
+  // use mutation for update operation
+  const updateMutation = useMutation({
+    mutationFn: (id: number) => updatePost(id),
+    onSuccess: (data, id) => {
+      queryClient.setQueryData(["posts", pageNumber], (curElem: any) => {
+        return curElem?.map((post: any) => {
+          console.log("ID:", id, "PostID:", post.id);
+          if (post.id === id) {
+            return { ...post, title: data.title };
+          } else return post;
+        });
+      });
+    },
+  });
+
   console.log("PageNumber:", pageNumber);
   if (isPending) return <p> Loading ....</p>;
   if (isError) return <p> Error: {error.message || "Something went wrong!"}</p>;
@@ -51,6 +66,10 @@ const FetchRQ = () => {
             </NavLink>
             <button onClick={() => deleteMutation.mutate(post.id)}>
               DELETE
+            </button>
+
+            <button onClick={() => updateMutation.mutate(post.id)}>
+              UPDATE
             </button>
           </li>
         ))}

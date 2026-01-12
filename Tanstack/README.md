@@ -164,3 +164,23 @@ const deleteMutation = useMutation({
   },
 });
 ```
+
+Here queryClient.setQueryData is used to update the cached data for a specific query. In this case it's the query with the key ["post", pageNumber] which likely represent the list of posts on the current page.
+
+### use mutation for update operation
+
+```ts
+const updateMutation = useMutation({
+  mutationFn: (id: number) => updatePost(id),
+  onSuccess: (data, id) => {
+    queryClient.setQueryData(["posts", pageNumber], (curElem: any) => {
+      return curElem?.map((post: any) => {
+        console.log("ID:", id, "PostID:", post.id);
+        if (post.id === id) {
+          return { ...post, title: data.title };
+        } else return post;
+      });
+    });
+  },
+});
+```

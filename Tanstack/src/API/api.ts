@@ -24,6 +24,11 @@ export const fetchIndvPost = async (id: string | undefined) => {
 
 // to delete a post
 export const deletePost = async (id: number) => {
-  const response = await api.delete(`/posts/${id}`);
+  return await api.delete(`/posts/${id}`);
+};
+
+// to update a post
+export const updatePost = async (id: number) => {
+  const response = await api.patch(`/posts/${id}`, `title=Updated Title`);
   return response.data;
 };
