@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { fetchIndvPost } from "../API/api";
 import { useQuery } from "@tanstack/react-query";
 
@@ -17,8 +17,12 @@ const FetchIndv = () => {
     <div>
       <ul className="section-accordion">
         <li key={data?.id}>
+          <h3>Post ID: {data?.id}</h3>
           <p>{data?.title}</p>
           <p>{data?.body}</p>
+          <button>
+            <NavLink to="/rq">Back To Posts</NavLink>
+          </button>
         </li>
       </ul>
     </div>

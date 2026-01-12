@@ -89,7 +89,7 @@ we can use gcTime Like this:
 const { data, isPending, isError, error } = useQuery({
   queryKey: ["posts"],
   queryFn: getPostsData,
-  gcTime: 1000,
+  `gcTime: 1000`,
 });
 ```
 
@@ -105,7 +105,7 @@ const { data, isPending, isError, error } = useQuery({
   queryKey: ["posts"],
   queryFn: getPostsData,
   gcTime: 1000,
-  staleTime: 10000,
+  `staleTime: 10000`,
 });
 ```
 
@@ -122,7 +122,24 @@ const { data, isPending, isError, error } = useQuery({
   queryFn: getPostsData,
   // gcTime: 1000,
   // staleTime: 10000,
-  refetchInterval: 5000,
-  refetchIntervalInBackground: true,
+  `refetchInterval: 5000,
+  refetchIntervalInBackground: true`,
+});
+```
+
+### placeholderData: keepPreviousData
+
+This option tells TanStack Query to keep showing the previous data while a new request is loading (for example, during pagination or parameter changes).
+It prevents empty or flashing UI by displaying the last available data until the new data arrives.
+
+```ts
+const { data, isPending, isError, error } = useQuery({
+  queryKey: ["posts", pageNumber],
+  queryFn: () => fetchPostsRQ(pageNumber),
+  // gcTime: 1000,
+  // staleTime: 10000,
+  // refetchInterval: 5000,
+  // refetchIntervalInBackground: true,
+  placeholderData: keepPreviousData,
 });
 ```

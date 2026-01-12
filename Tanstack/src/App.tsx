@@ -6,7 +6,7 @@ import FetchRQ from "./components/FetchRQ";
 import FetchIndv from "./components/FetchIndv";
 import InfiniteScroll from "./components/InfiniteScroll";
 import "./App.css";
-import { Query, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Create a router

@@ -1,27 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchPosts } from "../API/api";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { fetchPostsRQ } from "../API/api";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
-const FetchOld = () => {
-  const getPostsData = async () => {
-    console.log("Fetching posts data...");
-    try {
-      const res = await fetchPosts();
-      return res.status === 200 && res.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const FetchRQ = () => {
+  const [pageNumber, setPageNumber] = useState(1);
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPostsData,
-    // gcTime: 1000,
-    // staleTime: 10000,
-    refetchInterval: 5000,
-    refetchIntervalInBackground: true,
+    queryKey: ["posts", pageNumber],
+    queryFn: () => fetchPostsRQ(pageNumber),
+    //gcTime: 1000,
+    staleTime: 10000,
+    // refetchInterval: 5000,
+    // refetchIntervalInBackground: true,
+    placeholderData: keepPreviousData,
   });
-
+  console.log("PageNumber:", pageNumber);
   if (isPending) return <p> Loading ....</p>;
   if (isError) return <p> Error: {error.message || "Something went wrong!"}</p>;
 
@@ -38,8 +32,23 @@ const FetchOld = () => {
           </li>
         ))}
       </ul>
+      <div className="pagination-section container">
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          onClick={() => setPageNumber((prev: number) => prev - 1)}
+        >
+          Prev
+        </button>
+        <p>{pageNumber}</p>
+        <button
+          disabled={pageNumber === data?.length ? true : false || isPending}
+          onClick={() => setPageNumber((prev: number) => prev + 1)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
 
-export default FetchOld;
+export default FetchRQ;
