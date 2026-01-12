@@ -143,3 +143,24 @@ const { data, isPending, isError, error } = useQuery({
   placeholderData: keepPreviousData,
 });
 ```
+
+## useMutation
+
+### use mutation for delete operation
+
+```ts
+const queryClient = useQueryClient();
+
+const deleteMutation = useMutation({
+  mutationFn: (id: number) => deletePost(id),
+  onSuccess: (data, id) => {
+    //queryClient.invalidateQueries({ queryKey: ["posts", pageNumber] });
+    //refetching the data after deletion(use for real api)
+
+    queryClient.setQueryData(["posts", pageNumber], (curElem: any) => {
+      // use for fake api
+      return curElem?.filter((post: any) => post.id !== id);
+    });
+  },
+});
+```
